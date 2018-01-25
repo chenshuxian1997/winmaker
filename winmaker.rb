@@ -1,29 +1,32 @@
 require 'sketchup.rb'
 require 'offset.rb'
 #查找png图片，获取全路径名
+$flag=false
 def find_png(file_name="") 
   path=Sketchup.find_support_file file_name,"plugins/image"
   return path
 end
-module Win
+
 #选择面
-	def Win.sel
+	def sel
   	selection=Sketchup.active_model.selection
 		#分别成组
   	selection.each do |face|
-			face=selection.add_group
+			face=selection.to_group
+			flag=true
   	end
 	end
 	#弹窗（窗框宽度，厚度，玻璃厚度）
-  def Win.form
-		prompts=["窗框厚度","窗框厚度","玻璃厚度"]
-		val=["","",""]
-		results=UI.inputbox prompts,val,"参数"	
+	if flag==true
+ 	  def form 
+		  prompts=["窗框厚度","窗框厚度","玻璃厚度"]
+			val=["","",""]
+			results=UI.inputbox prompts,val,"参数"	
 		
 
+		end
 	end
-end
-Win
+
 #添加菜单
 
 #"扩展程序"菜单栏
